@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component;
 public class RewardsProgramConfig {
     int firstLevel;
     int secondLevel;
-    int firstLevelBonus;
-    int secondLevelBonus;
+    int firstLevelPoints;
+    int secondLevelPoints;
 }

@@ -2,6 +2,7 @@ package com.apriadchenko.rewardsprogram.config;
 
 import com.apriadchenko.rewardsprogram.dto.response.BaseResponse;
 import com.apriadchenko.rewardsprogram.dto.response.Result;
+import com.apriadchenko.rewardsprogram.exception.InvalidRequestException;
 import com.apriadchenko.rewardsprogram.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,14 @@ public class RewardsProgramExceptionHandler {
     public BaseResponse handle(NotFoundException exception) {
         log.warn(exception.getMessage());
         return buildBaseResponse(exception.getMessage(), exception.getErrorCode(), HttpStatus.NOT_FOUND.value());
+    }
+
+    @ExceptionHandler({InvalidRequestException.class})
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public BaseResponse handle(InvalidRequestException exception) {
+        log.warn(exception.getMessage());
+        return buildBaseResponse(exception.getMessage(), exception.getErrorCode(), HttpStatus.BAD_REQUEST.value());
     }
 
     @ExceptionHandler({Exception.class})

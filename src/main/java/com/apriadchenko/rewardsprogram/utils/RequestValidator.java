@@ -17,7 +17,7 @@ public class RequestValidator {
     private RequestValidator() {
     }
 
-    public static void validateAddTransactionDto(TransactionDto dto) {
+    public static void validateTransactionDto(TransactionDto dto) {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
         if (dto.getCustomerId() == null || dto.getCustomerId() < 0) {
             log.warn("Invalid customer id: {}", dto.getCustomerId());

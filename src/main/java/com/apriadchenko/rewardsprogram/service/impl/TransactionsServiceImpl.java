@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.apriadchenko.rewardsprogram.utils.RequestValidator.validateAddTransactionDto;
+import static com.apriadchenko.rewardsprogram.utils.RequestValidator.validateTransactionDto;
 
 
 @Service
@@ -27,7 +27,7 @@ public class TransactionsServiceImpl implements TransactionsService {
     @Override
     @Transactional
     public void addTransaction(TransactionDto transactionDto) {
-        validateAddTransactionDto(transactionDto);
+        validateTransactionDto(transactionDto);
         Transaction transaction = dtoToEntity(transactionDto);
         transactionRepository.save(transaction);
     }
@@ -35,7 +35,7 @@ public class TransactionsServiceImpl implements TransactionsService {
     @Override
     @Transactional
     public void updateTransaction(Integer id, TransactionDto transactionDto) {
-        validateAddTransactionDto(transactionDto);
+        validateTransactionDto(transactionDto);
         transactionRepository.findById(id).orElseThrow(() -> new NotFoundException(ExceptionType.TRANSACTION_NOT_FOUND));
         Transaction updatedTransaction = dtoToEntity(transactionDto);
         updatedTransaction.setId(id);
